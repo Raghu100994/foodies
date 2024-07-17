@@ -54,7 +54,7 @@ pipeline {
                   sudo su tomcat bash -c "tar -xvzf /u01/middleware/${TOMCAT_BINARY_FILE} -C /u01/middleware"
                   sudo cp src/main/config/tomcat.service.tmpl /etc/systemd/system/tomcat.service
                   JAVA_PATH=$(readlink -f $(which java))
-                  JAVA_HOME=$(echo JAVA_PATH | sed 's/bin.*//')
+                  JAVA_HOME=$(echo $JAVA_PATH | sed 's/bin.*//')
                   sudo sed -i 's|#JAVA_HOME_DIR#|'$JAVA_HOME'|g' /etc/systemd/system/tomcat.service
                   sudo sed -i 's|#TOMCAT_HOME_DIR#|'$TOMCAT_HOME_DIR'|g' /etc/systemd/system/tomcat.service
                   sudo sed -i 's|#TOMCAT_USER#|tomcat|g' /etc/systemd/system/tomcat.service
